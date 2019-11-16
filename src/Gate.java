@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.Random;
 
-public class Gate {
+public class Gate implements Serializable {
     private int terminal;
     private int gate;
 
