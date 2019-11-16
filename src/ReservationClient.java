@@ -47,6 +47,8 @@ public final class ReservationClient implements Runnable, ActionListener {
         airlineList.setSelectedIndex(0);
         airlineList.addActionListener(this);
         JLabel heading = new JLabel("Welcome to the Purdue University Airline Reservation Management System!");
+        heading.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+        airlineList.setAlignmentX(JPanel.CENTER_ALIGNMENT);
         top.add(heading);
         top.add(airlineList);
         airlineList.setVisible(false);
