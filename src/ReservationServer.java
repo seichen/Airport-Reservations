@@ -1,3 +1,7 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -5,7 +9,7 @@ import java.util.ArrayList;
 
 public final class ReservationServer {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         ServerSocket serverSocket = new ServerSocket(0);
         Socket clientSocket;
         ArrayList<Thread> t = new ArrayList<>();
@@ -23,9 +27,11 @@ public final class ReservationServer {
                 break;
             }
 
-            t.add(new Thread());
+            t.add(new Thread(new ReservationClient()));
 
             t.get(connectionCount).start();
+
+            t.get(connectionCount).join();
 
             connectionCount++;
 
@@ -33,6 +39,8 @@ public final class ReservationServer {
         }
 
     }
+
+
 
 
 }
