@@ -40,7 +40,7 @@ public final class ReservationClient implements Runnable {
 
         JFrame f = new JFrame("Purdue University Flight Reservation System");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(600,800);
+        f.setSize(600,600);
 
         JPanel top = new JPanel();
         top.setLayout(new BoxLayout(top, BoxLayout.Y_AXIS));
