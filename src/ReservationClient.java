@@ -56,7 +56,8 @@ public final class ReservationClient implements Runnable {
 
         JPanel mid = new JPanel();
         mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
-        JLabel middle = new JLabel();
+        JLabel middle = new JLabel(alaska.toString());
+        middle.setHorizontalAlignment(JLabel.CENTER);
         JTextField firstName = new JTextField();
         JLabel last = new JLabel("What is your last name?");
         JTextField lastname = new JTextField();
@@ -68,6 +69,7 @@ public final class ReservationClient implements Runnable {
         mid.add(lastname);
         mid.add(age);
         mid.add(a);
+        middle.setVisible(false);
         firstName.setVisible(false);
         last.setVisible(false);
         lastname.setVisible(false);
@@ -93,6 +95,7 @@ public final class ReservationClient implements Runnable {
         JButton exit = new JButton("Exit");
         JButton no = new JButton();
         JButton book = new JButton("Book a Flight");
+        book.setActionCommand("toStep3");
         jp.add(exit);
         jp.add(no);
         no.setVisible(false);
@@ -104,7 +107,25 @@ public final class ReservationClient implements Runnable {
         f.getContentPane().add(BorderLayout.SOUTH, jp);
         f.setVisible(true);
 
-
+        book.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if ("toStep3".equals(actionEvent.getActionCommand())) {
+                    heading.setText("Do you want to book a flight today?");
+                    heading.updateUI();
+                    book.setText("Yes, I want to book a flight");
+                    book.updateUI();
+                    book.setActionCommand("toStep4");
+                }
+                if ("toStep4".equals(actionEvent.getActionCommand())) {
+                    airlineList.setVisible(true);
+                    heading.setText("Choose a flight from the drop down menu.");
+                    middle.setVisible(true);
+                    book.setText("Choose this flight");
+                    book.setActionCommand("toStep5");
+                }
+            }
+        });
 
 
     }

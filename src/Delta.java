@@ -3,13 +3,11 @@ import java.util.ArrayList;
 
 public class Delta implements Airline {
 
-    ArrayList<String> passengers = new ArrayList<>();
-
     public String toString() {
-        return "Delta Airlines is proud too be one of the five premier Airlines at Purdue University\n" +
-                "We offer exceptional services, with free limited WiFi for all customers.\n" +
-                "Passengers who use T-Mobile as a cell phone carrier get additional benefits.\n" +
-                "We are also happy to offer power outlets in each seat for passenger use.\n" +
+        return "<html><div style='text-align: center;'>Delta Airlines is proud too be one of the five premier Airlines at Purdue University<br>" +
+                "We offer exceptional services, with free limited WiFi for all customers.<br>" +
+                "Passengers who use T-Mobile as a cell phone carrier get additional benefits.<br>" +
+                "We are also happy to offer power outlets in each seat for passenger use.<br>" +
                 "We hope you choose to fly Delta as your next Airline.";
     }
 
@@ -43,6 +41,16 @@ public class Delta implements Airline {
         String line;
         String line2;
         while (!(line = br.readLine()).equals("EOF") && !(line2 = br.readLine()).equals("EOF")) {
+            if (line.equals("DELTA")) {
+                pw.println(line);
+                String[] nums = line2.split("/");
+                int add = Integer.parseInt(nums[0]) + 1;
+                line2 = "" + nums[0] + "/" + nums[1];
+                pw.println(line2);
+            } else {
+                pw.println(line);
+                pw.println(line2);
+            }
             if (line.contains("-") && line.contains("DELTA") && line2 == null) {
                 pw.println(line);
                 pw.println((String) null);
@@ -54,6 +62,42 @@ public class Delta implements Airline {
         pw.close();
         file.delete();
         temp.renameTo(file);
-        passengers.add(passenger);
+    }
+
+    @Override
+    public ArrayList<String> getPassengers() throws IOException {
+        File f = new File("reservations.txt");
+        BufferedReader br = new BufferedReader(new FileReader(f));
+        String line;
+        ArrayList<String> passengers = new ArrayList<>();
+        boolean start = false;
+
+        while (!(line = br.readLine()).equals("EOF")) {
+            if (line.equals("SOUTHWEST")) {
+                start = false;
+            }
+            if (start && !line.contains("-") && !line.equals("")) {
+                passengers.add(line);
+            }
+            if (line.equals("Delta passenger list")) {
+                start = true;
+            }
+        }
+        return passengers;
+    }
+
+    @Override
+    public String getCapacity() throws IOException {
+        File f = new File("reservations.txt");
+        BufferedReader br = new BufferedReader(new FileReader(f));
+        String line;
+
+        while (!(line = br.readLine()).equals("EOF")) {
+            if (line.equals("DELTA")) {
+                line = br.readLine();
+                break;
+            }
+        }
+        return line;
     }
 }

@@ -3,14 +3,14 @@ import java.util.ArrayList;
 
 public class Alaska implements Airline {
 
-    ArrayList<String> passengers = new ArrayList<>();
+
 
     public String toString() {
-        return "Alaska Airlines is proud to serve the strong and knowledgeable Boilermakers from Purdue University.\n" +
-                "We primarily fly westward, and often have stops in Alaska and California.\n" +
-                "We have first class amenities, even in coach class.\n" +
-                "We provide fun snacks, such as pretzels and goldfish.\n" +
-                "We also have comfortable seats, and free WiFi.\n" +
+        return "<html><div style='text-align: center;'>Alaska Airlines is proud to serve the strong and knowledgeable Boilermakers from Purdue University.<br>" +
+                "We primarily fly westward, and often have stops in Alaska and California.<br>" +
+                "We have first class amenities, even in coach class.<br>" +
+                "We provide fun snacks, such as pretzels and goldfish.<br>" +
+                "We also have comfortable seats, and free WiFi.<br>" +
                 "We hope you choose Alaska Airlines for your next itinerary!";
     }
 
@@ -44,9 +44,17 @@ public class Alaska implements Airline {
         String line;
         String line2;
         while (!(line = br.readLine()).equals("EOF") && !(line2 = br.readLine()).equals("EOF")) {
-            if (line.contains("-") && line.contains("ALASKA") && line2 == null) {
+            if (line.equals("ALASKA")) {
                 pw.println(line);
-                pw.println((String) null);
+                String[] nums = line2.split("/");
+                int add = Integer.parseInt(nums[0]) + 1;
+                line2 = "" + nums[0] + "/" + nums[1];
+                pw.println(line2);
+            } else {
+                pw.println(line);
+                pw.println(line2);
+            }
+            if (line.contains("-") && line.contains("ALASKA") && line2 == null) {
                 pw.println(passenger);
                 pw.println("------------------------------ALASKA");
             }
@@ -55,6 +63,42 @@ public class Alaska implements Airline {
         pw.close();
         file.delete();
         temp.renameTo(file);
-        passengers.add(passenger);
+    }
+
+    @Override
+    public ArrayList<String> getPassengers() throws IOException {
+        File f = new File("reservations.txt");
+        BufferedReader br = new BufferedReader(new FileReader(f));
+        String line;
+        ArrayList<String> passengers = new ArrayList<>();
+        boolean start = false;
+
+        while (!(line = br.readLine()).equals("EOF")) {
+            if (line.equals("DELTA")) {
+                start = false;
+            }
+            if (start && !line.contains("-") && !line.equals("")) {
+                passengers.add(line);
+            }
+            if (line.equals("Alaska passenger list")) {
+                start = true;
+            }
+        }
+        return passengers;
+    }
+
+    @Override
+    public String getCapacity() throws IOException {
+        File f = new File("reservations.txt");
+        BufferedReader br = new BufferedReader(new FileReader(f));
+        String line;
+
+        while (!(line = br.readLine()).equals("EOF")) {
+            if (line.equals("ALASKA")) {
+                line = br.readLine();
+                break;
+            }
+        }
+        return line;
     }
 }
