@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.*;
 import java.net.Socket;
 
@@ -34,9 +36,11 @@ public final class ReservationClient implements Runnable {
 
     @Override
     public void run() {
+
         Alaska alaska = new Alaska();
         Southwest sw = new Southwest();
         Delta d = new Delta();
+        String airline;
 
         JFrame f = new JFrame("Purdue University Flight Reservation System");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,11 +97,12 @@ public final class ReservationClient implements Runnable {
 
         JPanel jp = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton exit = new JButton("Exit");
-        JButton no = new JButton();
+        JButton no = new JButton("No, I want a different flight.");
         JButton book = new JButton("Book a Flight");
         book.setActionCommand("toStep3");
         jp.add(exit);
         jp.add(no);
+        no.setActionCommand("no");
         no.setVisible(false);
         jp.add(book);
 
@@ -124,9 +129,53 @@ public final class ReservationClient implements Runnable {
                     book.setText("Choose this flight");
                     book.setActionCommand("toStep5");
                 }
+                if ("toStep5".equals(actionEvent.getActionCommand())) {
+                    String airline = (String) airlineList.getSelectedItem();
+                    if (airline.equals("Alaska")) {
+                        if (alaska.spaceAvailable()) {
+                            airlineList.setVisible(false);
+                            middle.setVisible(false);
+                            heading.setText("Are you sure that you want to book a flight on Alaska Airlines?");
+                            book.setText("Yes, I want this flight");
+                            book.setActionCommand("toStep6");
+                            no.setVisible(true);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Flight is full");
+                        }
+                    } else if (airline.equals("Southwest")) {
+                            if (sw.spaceAvailable()) {
+                                airlineList.setVisible(false);
+                                middle.setVisible(false);
+                                heading.setText("Are you sure that you want to book a flight on Alaska Airlines?");
+                                book.setText("Yes, I want this flight");
+                                book.setActionCommand("toStep6");
+                                no.setVisible(true);
+                                JOptionPane.showMessageDialog(null, alaska.getCapacity());
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Flight is full");
+                            }
+                    } else {
+                            if (d.spaceAvailable()) {
+                                airlineList.setVisible(false);
+                                middle.setVisible(false);
+                                heading.setText("Are you sure that you want to book a flight on Alaska Airlines?");
+                                book.setText("Yes, I want this flight");
+                                book.setActionCommand("toStep6");
+                                no.setVisible(true);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Flight is full");
+                            }
+                    }
+                }
+                if ("no".equals(actionEvent.getActionCommand())) {
+                    airlineList.setVisible(true);
+                    heading.setText("Choose a flight from the drop down menu.");
+                    middle.setVisible(true);
+                    book.setText("Choose this flight");
+                    book.setActionCommand("toStep5");
+                }
             }
         });
-
 
     }
 
