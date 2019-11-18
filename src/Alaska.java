@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -18,7 +17,7 @@ public class Alaska implements Airline {
     @Override
     public boolean spaceAvailable() {
         try {
-            File f = new File("reservations.txt");
+            File f = new File("C:\\Users\\Sabrina\\Desktop\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
 
@@ -44,7 +43,7 @@ public class Alaska implements Airline {
     @Override
     public void addPassenger(String passenger){
         try {
-            File file = new File("reservations.txt");
+            File file = new File("C:\\Users\\Sabrina\\Desktop\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             File temp = File.createTempFile("temp-file-name", ".txt");
             BufferedReader br = new BufferedReader(new FileReader(file));
             PrintWriter pw = new PrintWriter(new FileWriter(temp));
@@ -78,7 +77,7 @@ public class Alaska implements Airline {
     @Override
     public String getPassengers() {
         try {
-            File f = new File("reservations.txt");
+            File f = new File("C:\\Users\\Sabrina\\Desktop\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
             ArrayList<String> passengers = new ArrayList<>();
@@ -109,7 +108,7 @@ public class Alaska implements Airline {
     @Override
     public String getCapacity(){
         try {
-            File f = new File("reservations.txt");
+            File f = new File("C:\\Users\\Sabrina\\Desktop\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
 

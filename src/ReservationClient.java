@@ -1,9 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.io.*;
 import java.net.Socket;
 
@@ -101,6 +98,7 @@ public final class ReservationClient implements Runnable {
         JButton book = new JButton("Book a Flight");
         book.setActionCommand("toStep3");
         jp.add(exit);
+        exit.setActionCommand("Exit");
         jp.add(no);
         no.setActionCommand("no");
         no.setVisible(false);
@@ -111,6 +109,17 @@ public final class ReservationClient implements Runnable {
         f.getContentPane().add(BorderLayout.CENTER, mid);
         f.getContentPane().add(BorderLayout.SOUTH, jp);
         f.setVisible(true);
+
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if ("Exit".equals(actionEvent.getActionCommand())) {
+                    f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
+                    f.setVisible(false);
+                    f.dispose();
+                }
+            }
+        });
 
         book.addActionListener(new ActionListener() {
             @Override
@@ -150,7 +159,6 @@ public final class ReservationClient implements Runnable {
                                 book.setText("Yes, I want this flight");
                                 book.setActionCommand("toStep6");
                                 no.setVisible(true);
-                                JOptionPane.showMessageDialog(null, alaska.getCapacity());
                             } else {
                                 JOptionPane.showMessageDialog(null, "Flight is full");
                             }
@@ -167,6 +175,13 @@ public final class ReservationClient implements Runnable {
                             }
                     }
                 }
+            }
+        });
+
+        no.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
                 if ("no".equals(actionEvent.getActionCommand())) {
                     airlineList.setVisible(true);
                     heading.setText("Choose a flight from the drop down menu.");
