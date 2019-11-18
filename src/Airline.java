@@ -1,14 +1,12 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public interface Airline extends Serializable {
-    boolean spaceAvailable() throws IOException;
+    boolean spaceAvailable();
 
-    void addPassenger(String passenger) throws IOException;
+    void addPassenger(String passenger);
 
-    ArrayList<String> getPassengers() throws IOException;
+    String getPassengers();
 
-    String getCapacity() throws IOException;
+    String getCapacity();
 }
