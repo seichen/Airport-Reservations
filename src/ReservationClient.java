@@ -96,7 +96,7 @@ public final class ReservationClient implements Runnable {
         JButton exit = new JButton("Exit");
         JButton no = new JButton("No, I want a different flight.");
         JButton book = new JButton("Book a Flight");
-        book.setActionCommand("toStep3");
+        book.setActionCommand("Step3");
         jp.add(exit);
         exit.setActionCommand("Exit");
         jp.add(no);
@@ -124,21 +124,67 @@ public final class ReservationClient implements Runnable {
         book.addActionListener(new ActionListener() { // MAIN BUTTON -- DO EVERYTHING HERE
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if ("toStep3".equals(actionEvent.getActionCommand())) {
+                if ("Step3".equals(actionEvent.getActionCommand())) {
                     heading.setText("Do you want to book a flight today?");
                     heading.updateUI();
                     book.setText("Yes, I want to book a flight");
                     book.updateUI();
-                    book.setActionCommand("toStep4");
+                    book.setActionCommand("Step4");
                 }
-                if ("toStep4".equals(actionEvent.getActionCommand())) {
+                if ("Step4".equals(actionEvent.getActionCommand())) {
+
+                    JPanel cp = (JPanel) f.getContentPane(); //START OF KEY BIND
+                    ActionMap aMap = cp.getActionMap();
+                    InputMap inMap = cp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+                    KeyStroke slashKey = KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, 0, true);
+                    inMap.put(slashKey, "OpenAirlineList");
+                    AbstractAction abstractAction = new AbstractAction() {
+
+                        @Override
+
+                        public void actionPerformed(ActionEvent e) {
+
+                            String airline = (String) airlineList.getSelectedItem();
+
+                            if (airline.equals("Southwest")) {
+                                JTextArea textArea = new JTextArea(6, 25);
+                                textArea.setText("Southwest " + sw.getCapacity() + "\n" + sw.getPassengers());
+                                textArea.setEditable(false);
+                                JScrollPane scrollPane = new JScrollPane(textArea);
+                                JOptionPane.showMessageDialog(null, scrollPane, "Passengers",
+                                        JOptionPane.PLAIN_MESSAGE);
+                            } else if (airline.equals("Delta")) {
+                                JTextArea textArea = new JTextArea(6, 25);
+                                textArea.setText("Delta " + d.getCapacity() + "\n" + d.getPassengers());
+                                textArea.setEditable(false);
+                                JScrollPane scrollPane = new JScrollPane(textArea);
+                                JOptionPane.showMessageDialog(null, scrollPane, "Passengers",
+                                        JOptionPane.PLAIN_MESSAGE);
+
+                            } else if (airline.equals("Alaska")){
+                                JTextArea textArea = new JTextArea(6, 25);
+                                textArea.setText("Alaska " + alaska.getCapacity() + "\n" + alaska.getPassengers());
+                                textArea.setEditable(false);
+                                JScrollPane scrollPane = new JScrollPane(textArea);
+                                JOptionPane.showMessageDialog(null, scrollPane, "Passengers",
+                                        JOptionPane.PLAIN_MESSAGE);
+
+                            }
+
+                        }
+
+
+                    };
+                    aMap.put("OpenAirlineList", abstractAction);
+
                     airlineList.setVisible(true);
                     heading.setText("Choose a flight from the drop down menu.");
                     middle.setVisible(true);
                     book.setText("Choose this flight");
-                    book.setActionCommand("toStep5");
+                    book.setActionCommand("Step5");
                 }
-                if ("toStep5".equals(actionEvent.getActionCommand())) {
+                if ("Step5".equals(actionEvent.getActionCommand())) {
+
                     String airline = (String) airlineList.getSelectedItem();
                     if (airline.equals("Alaska")) {
                         if (alaska.spaceAvailable()) {
@@ -175,11 +221,19 @@ public final class ReservationClient implements Runnable {
                             }
                     }
                 }
-                // TO STEP 6
+                // STEP 6
 
-                // TO STEP 7
+                // STEP 7
+                /* JPanel cp = (JPanel) f.getContentPane();
+                ActionMap aMap = cp.getActionMap();
+                InputMap inMap = cp.getInputMap();
+                KeyStroke slashKey = KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, 0, true);
+                inMap.put(slashKey, null);
+                aMap.put(slashKey, null);
+                ^^^^ input this into step 7 ^^^^
+                */
 
-                // TO STEP 8
+                // STEP 8
             }
         });
 
