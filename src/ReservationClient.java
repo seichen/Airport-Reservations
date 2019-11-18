@@ -43,7 +43,7 @@ public final class ReservationClient implements Runnable {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(600,600);
 
-        JPanel top = new JPanel();
+        JPanel top = new JPanel(); //top panel
         top.setLayout(new BoxLayout(top, BoxLayout.Y_AXIS));
         String[] airlines = {"Alaska", "Southwest", "Delta"};
         JComboBox<String> airlineList = new JComboBox<>(airlines);
@@ -55,7 +55,7 @@ public final class ReservationClient implements Runnable {
         top.add(airlineList);
         airlineList.setVisible(false);
 
-        JPanel mid = new JPanel();
+        JPanel mid = new JPanel(); // middle panel
         mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
         JLabel middle = new JLabel(alaska.toString());
         middle.setHorizontalAlignment(JLabel.CENTER);
@@ -77,7 +77,7 @@ public final class ReservationClient implements Runnable {
         age.setVisible(false);
         a.setVisible(false);
 
-        airlineList.addActionListener(new ActionListener() {
+        airlineList.addActionListener(new ActionListener() { //JComboBox for airline selection
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 JComboBox cb = (JComboBox)actionEvent.getSource();
@@ -92,7 +92,7 @@ public final class ReservationClient implements Runnable {
             }
         });
 
-        JPanel jp = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel jp = new JPanel(new FlowLayout(FlowLayout.CENTER)); // bottom panel
         JButton exit = new JButton("Exit");
         JButton no = new JButton("No, I want a different flight.");
         JButton book = new JButton("Book a Flight");
@@ -110,7 +110,7 @@ public final class ReservationClient implements Runnable {
         f.getContentPane().add(BorderLayout.SOUTH, jp);
         f.setVisible(true);
 
-        exit.addActionListener(new ActionListener() {
+        exit.addActionListener(new ActionListener() { // exit button
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if ("Exit".equals(actionEvent.getActionCommand())) {
@@ -121,7 +121,7 @@ public final class ReservationClient implements Runnable {
             }
         });
 
-        book.addActionListener(new ActionListener() {
+        book.addActionListener(new ActionListener() { // MAIN BUTTON -- DO EVERYTHING HERE
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if ("toStep3".equals(actionEvent.getActionCommand())) {
@@ -175,10 +175,15 @@ public final class ReservationClient implements Runnable {
                             }
                     }
                 }
+                // TO STEP 6
+
+                // TO STEP 7
+
+                // TO STEP 8
             }
         });
 
-        no.addActionListener(new ActionListener() {
+        no.addActionListener(new ActionListener() { // no button
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
@@ -191,14 +196,6 @@ public final class ReservationClient implements Runnable {
                 }
             }
         });
-
-    }
-
-    public synchronized boolean isFull(String airline) {
-        return false;
-    }
-
-    public synchronized void reserveSpot(String passenger, String airline) {
 
     }
 }
