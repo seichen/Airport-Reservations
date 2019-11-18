@@ -54,13 +54,13 @@ public class Alaska implements Airline {
                     pw.println(line);
                     String[] nums = line2.split("/");
                     int add = Integer.parseInt(nums[0]) + 1;
-                    line2 = "" + nums[0] + "/" + nums[1];
+                    line2 = "" + add + "/" + nums[1];
                     pw.println(line2);
                 } else {
                     pw.println(line);
                     pw.println(line2);
                 }
-                if (line.contains("-") && line.contains("ALASKA") && line2 == null) {
+                if (line.equals("Alaska passenger list")) {
                     pw.println(passenger);
                     pw.println("------------------------------ALASKA");
                 }

@@ -12,6 +12,7 @@ N. CLAYMAN, 19
 DELTA
 2/200
 Delta passenger list
+
 C. WESTMEYER, 19
 ---------------------DELTA
 K. ABHYANKAR, 19
@@ -21,6 +22,7 @@ K. ABHYANKAR, 19
 SOUTHWEST
 1/100
 Southwest passenger list
+
 C. WESTMEYER, 20
 ---------------------SOUTHWEST
 

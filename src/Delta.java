@@ -51,15 +51,13 @@ public class Delta implements Airline {
                     pw.println(line);
                     String[] nums = line2.split("/");
                     int add = Integer.parseInt(nums[0]) + 1;
-                    line2 = "" + nums[0] + "/" + nums[1];
+                    line2 = "" + add + "/" + nums[1];
                     pw.println(line2);
                 } else {
                     pw.println(line);
                     pw.println(line2);
                 }
-                if (line.contains("-") && line.contains("DELTA") && line2 == null) {
-                    pw.println(line);
-                    pw.println((String) null);
+                if (line.equals("Delta passenger list")) {
                     pw.println(passenger);
                     pw.println("------------------------------DELTA");
                 }
