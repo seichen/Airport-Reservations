@@ -214,7 +214,7 @@ public final class ReservationClient implements Runnable {
                                 middle.setVisible(false);
                                 heading.setText("Are you sure that you want to book a flight on Alaska Airlines?");
                                 book.setText("Yes, I want this flight");
-                                book.setActionCommand("toStep6");
+                                book.setActionCommand("Step6");
                                 no.setVisible(true);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Flight is full");
@@ -247,6 +247,7 @@ public final class ReservationClient implements Runnable {
                     middle.setVisible(true);
                     book.setText("Choose this flight");
                     book.setActionCommand("toStep5");
+                    no.setVisible(false);
                 }
             }
         });
