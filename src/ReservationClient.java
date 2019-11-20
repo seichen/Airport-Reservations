@@ -175,7 +175,7 @@ public final class ReservationClient implements Runnable {
 
 
                     };
-                    aMap.put("OpenAirlineList", abstractAction);
+                    aMap.put("OpenAirlineList", abstractAction); // end of keybind
 
                     airlineList.setVisible(true);
                     heading.setText("Choose a flight from the drop down menu.");
@@ -222,6 +222,7 @@ public final class ReservationClient implements Runnable {
                     }
                 }
                 // STEP 6
+                // may need to copy key bind into this method
 
                 // STEP 7
                 /* JPanel cp = (JPanel) f.getContentPane();
