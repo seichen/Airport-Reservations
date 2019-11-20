@@ -247,6 +247,7 @@ public final class ReservationClient implements Runnable {
                     middle.setVisible(true);
                     book.setText("Choose this flight");
                     book.setActionCommand("toStep5");
+                    no.setVisible(false);
                 }
             }
         });
