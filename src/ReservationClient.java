@@ -3,8 +3,19 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.Socket;
+import java.util.Objects;
+import java.util.Scanner;
 
 public final class ReservationClient implements Runnable {
+
+    private Socket clientSocket;
+
+    ReservationClient(Socket clientSocket) {
+        Objects.requireNonNull(clientSocket, "the specified client socket is null");
+
+        this.clientSocket = clientSocket;
+    }
+
     public static void main(String[] args) throws IOException {
         String hostname;
         String portString;
@@ -33,6 +44,13 @@ public final class ReservationClient implements Runnable {
 
     @Override
     public void run() {
+
+        try {
+            PrintWriter pw = new PrintWriter(clientSocket.getOutputStream());
+            Scanner in = new Scanner(clientSocket.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Alaska alaska = new Alaska();
         Southwest sw = new Southwest();
@@ -201,7 +219,7 @@ public final class ReservationClient implements Runnable {
                             if (sw.spaceAvailable()) {
                                 airlineList.setVisible(false);
                                 middle.setVisible(false);
-                                heading.setText("Are you sure that you want to book a flight on Alaska Airlines?");
+                                heading.setText("Are you sure that you want to book a flight on Southwest Airlines?");
                                 book.setText("Yes, I want this flight");
                                 book.setActionCommand("toStep6");
                                 no.setVisible(true);
@@ -212,7 +230,7 @@ public final class ReservationClient implements Runnable {
                             if (d.spaceAvailable()) {
                                 airlineList.setVisible(false);
                                 middle.setVisible(false);
-                                heading.setText("Are you sure that you want to book a flight on Alaska Airlines?");
+                                heading.setText("Are you sure that you want to book a flight on Delta Airlines?");
                                 book.setText("Yes, I want this flight");
                                 book.setActionCommand("Step6");
                                 no.setVisible(true);
@@ -222,7 +240,7 @@ public final class ReservationClient implements Runnable {
                     }
                 }
                 // STEP 6
-                // may need to copy key bind into this method
+                // write passenger to file by using the server not the airline class
 
                 // STEP 7
                 /* JPanel cp = (JPanel) f.getContentPane();

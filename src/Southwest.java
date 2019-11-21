@@ -13,7 +13,7 @@ public class Southwest implements Airline {
     @Override
     public boolean spaceAvailable(){
         try {
-            File f = new File("C:\\Users\\Sabrina\\Desktop\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
 
@@ -39,7 +39,7 @@ public class Southwest implements Airline {
     @Override
     public void addPassenger(String passenger){
         try {
-            File file = new File("C:\\Users\\Sabrina\\Desktop\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File file = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             File temp = File.createTempFile("temp-file-name", ".txt");
             BufferedReader br = new BufferedReader(new FileReader(file));
             PrintWriter pw = new PrintWriter(new FileWriter(temp));
@@ -73,14 +73,14 @@ public class Southwest implements Airline {
     @Override
     public String getPassengers(){
         try {
-            File f = new File("C:\\Users\\Sabrina\\Desktop\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
             ArrayList<String> passengers = new ArrayList<>();
             boolean start = false;
 
             while (!(line = br.readLine()).equals("EOF")) {
-                if (start && !line.contains("-") && !line.equals("")) {
+                if (start && !line.contains("-") && !line.equals("") && !line.contains("SOUTHWEST")) {
                     passengers.add(line);
                 }
                 if (line.equals("Southwest passenger list")) {
@@ -101,7 +101,7 @@ public class Southwest implements Airline {
     @Override
     public String getCapacity(){
         try {
-            File f = new File("C:\\Users\\Sabrina\\Desktop\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
 
