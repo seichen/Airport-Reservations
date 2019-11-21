@@ -222,18 +222,37 @@ public final class ReservationClient {
 
                             String airline = (String) airlineList.getSelectedItem();
                             if (airline.equals("Alaska")) {
-                                if (alaska.spaceAvailable()) {
-                                    airlineList.setVisible(false);
-                                    middle.setVisible(false);
-                                    heading.setText("Are you sure that you want to book a flight on Alaska Airlines?");
-                                    book.setText("Yes, I want this flight");
-                                    book.setActionCommand("toStep6");
-                                    no.setVisible(true);
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Flight is full");
+                                try {
+                                    cos.writeObject(alaska);
+                                    cos.writeObject(null);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    Boolean test = cis.readBoolean();
+                                    if (test) {
+                                        airlineList.setVisible(false);
+                                        middle.setVisible(false);
+                                        heading.setText("Are you sure that you want to book a flight on Alaska Airlines?");
+                                        book.setText("Yes, I want this flight");
+                                        book.setActionCommand("toStep6");
+                                        no.setVisible(true);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Flight is full");
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
                                 }
                             } else if (airline.equals("Southwest")) {
-                                if (sw.spaceAvailable()) {
+                                try {
+                                    cos.writeObject(sw);
+                                    cos.writeObject(null);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    Boolean test = cis.readBoolean();
+                                    if (test) {
                                     airlineList.setVisible(false);
                                     middle.setVisible(false);
                                     heading.setText("Are you sure that you want to book a flight on Southwest Airlines?");
@@ -243,16 +262,30 @@ public final class ReservationClient {
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Flight is full");
                                 }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             } else {
-                                if (d.spaceAvailable()) {
-                                    airlineList.setVisible(false);
-                                    middle.setVisible(false);
-                                    heading.setText("Are you sure that you want to book a flight on Delta Airlines?");
-                                    book.setText("Yes, I want this flight");
-                                    book.setActionCommand("Step6");
-                                    no.setVisible(true);
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Flight is full");
+                                try {
+                                    cos.writeObject(d);
+                                    cos.writeObject(null);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                try {
+                                    Boolean test = cis.readBoolean();
+                                    if (test) {
+                                        airlineList.setVisible(false);
+                                        middle.setVisible(false);
+                                        heading.setText("Are you sure that you want to book a flight on Delta Airlines?");
+                                        book.setText("Yes, I want this flight");
+                                        book.setActionCommand("Step6");
+                                        no.setVisible(true);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Flight is full");
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
                                 }
                             }
                         }
