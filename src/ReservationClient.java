@@ -3,8 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.Socket;
-import java.util.Objects;
-import java.util.Scanner;
 
 public final class ReservationClient {
 
