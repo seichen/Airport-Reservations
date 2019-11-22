@@ -115,7 +115,7 @@ public class Delta implements Airline {
                     break;
                 }
             }
-            return line;
+            return "DELTA " + line;
         } catch (IOException e) {
 
         }

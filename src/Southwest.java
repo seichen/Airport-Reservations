@@ -111,7 +111,7 @@ public class Southwest implements Airline {
                     break;
                 }
             }
-            return line;
+            return "SOUTHWEST " + line;
         } catch (IOException e) {
 
         }

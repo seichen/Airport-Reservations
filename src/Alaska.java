@@ -118,7 +118,7 @@ public class Alaska implements Airline {
                     break;
                 }
             }
-            return line;
+            return "ALASKA " + line;
         }catch (IOException e) {
 
         }

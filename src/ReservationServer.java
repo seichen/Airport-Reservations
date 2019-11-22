@@ -1,8 +1,10 @@
+import javax.swing.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Scanner;
 
 public final class ReservationServer {
 
@@ -70,6 +72,13 @@ public final class ReservationServer {
                     } else if (one instanceof  Airline && two instanceof Airline) {
                         cos.writeObject(one.toString());
                         cos.flush();
+                    } else if (one instanceof Airline && two instanceof JFrame) {
+                        JLabel jl = new JLabel(((Airline) one).getCapacity());
+                        JTextArea textArea = new JTextArea(6, 25);
+                        textArea.setText(((Airline) one).getPassengers());
+                        textArea.setEditable(false);
+                        cos.writeObject(jl);
+                        cos.writeObject(textArea);
                     }
                 }
                 cos.close();
