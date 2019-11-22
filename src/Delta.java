@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Delta implements Airline {
 
-    public String toString() {
+    public synchronized String toString() {
         return "<html><div style='text-align: center;'>Delta Airlines is proud too be one of the five premier Airlines at Purdue University<br>" +
                 "We offer exceptional services, with free limited WiFi for all customers.<br>" +
                 "Passengers who use T-Mobile as a cell phone carrier get additional benefits.<br>" +
@@ -12,7 +12,7 @@ public class Delta implements Airline {
     }
 
     @Override
-    public boolean spaceAvailable(){
+    public synchronized boolean spaceAvailable(){
         try {
             File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
@@ -38,7 +38,7 @@ public class Delta implements Airline {
     }
 
     @Override
-    public void addPassenger(String passenger){
+    public synchronized void addPassenger(String passenger){
         try {
             File file = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             File temp = File.createTempFile("temp-file-name", ".txt");
@@ -72,7 +72,7 @@ public class Delta implements Airline {
     }
 
     @Override
-    public String getPassengers(){
+    public synchronized String getPassengers(){
         try {
             File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
@@ -103,7 +103,7 @@ public class Delta implements Airline {
     }
 
     @Override
-    public String getCapacity(){
+    public synchronized String getCapacity(){
         try {
             File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
@@ -115,7 +115,7 @@ public class Delta implements Airline {
                     break;
                 }
             }
-            return line;
+            return "DELTA " + line;
         } catch (IOException e) {
 
         }

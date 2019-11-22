@@ -5,7 +5,7 @@ public class Alaska implements Airline {
 
 
 
-    public String toString() {
+    public synchronized String toString() {
         return "<html><div style='text-align: center;'>Alaska Airlines is proud to serve the strong and knowledgeable Boilermakers from Purdue University.<br>" +
                 "We primarily fly westward, and often have stops in Alaska and California.<br>" +
                 "We have first class amenities, even in coach class.<br>" +
@@ -15,7 +15,7 @@ public class Alaska implements Airline {
     }
 
     @Override
-    public boolean spaceAvailable() {
+    public synchronized boolean spaceAvailable() {
         try {
             File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
@@ -41,7 +41,7 @@ public class Alaska implements Airline {
     }
 
     @Override
-    public void addPassenger(String passenger){
+    public synchronized void addPassenger(String passenger){
         try {
             File file = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             File temp = File.createTempFile("temp-file-name", ".txt");
@@ -75,7 +75,7 @@ public class Alaska implements Airline {
     }
 
     @Override
-    public String getPassengers() {
+    public synchronized String getPassengers() {
         try {
             File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
@@ -106,7 +106,7 @@ public class Alaska implements Airline {
     }
 
     @Override
-    public String getCapacity(){
+    public synchronized String getCapacity(){
         try {
             File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
@@ -118,7 +118,7 @@ public class Alaska implements Airline {
                     break;
                 }
             }
-            return line;
+            return "ALASKA " + line;
         }catch (IOException e) {
 
         }

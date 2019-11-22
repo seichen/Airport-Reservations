@@ -3,8 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.Socket;
-import java.util.Objects;
-import java.util.Scanner;
 
 public final class ReservationClient {
 
@@ -103,7 +101,7 @@ public final class ReservationClient {
                             try {
                                 cos.writeObject(sw);
                                 cos.flush();
-                                cos.writeObject(alaska);
+                                cos.writeObject(sw);
                                 cos.flush();
                                 String line = (String) cis.readObject();
 
@@ -115,7 +113,7 @@ public final class ReservationClient {
                             try {
                                 cos.writeObject(d);
                                 cos.flush();
-                                cos.writeObject(alaska);
+                                cos.writeObject(d);
                                 cos.flush();
                                 String line = (String) cis.readObject();
 
@@ -180,31 +178,66 @@ public final class ReservationClient {
                                 public void actionPerformed(ActionEvent e) {
 
                                     String airline = (String) airlineList.getSelectedItem();
+                                    JFrame jf = new JFrame("Passengers");
+                                    jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                    jf.setSize(300,300);
+
 
                                     if (airline.equals("Southwest")) {
-                                        JTextArea textArea = new JTextArea(6, 25);
-                                        textArea.setText("Southwest " + sw.getCapacity() + "\n" + sw.getPassengers());
-                                        textArea.setEditable(false);
-                                        JScrollPane scrollPane = new JScrollPane(textArea);
-                                        JOptionPane.showMessageDialog(null, scrollPane, "Passengers",
-                                                JOptionPane.PLAIN_MESSAGE);
+                                        try {
+                                            cos.writeObject(sw);
+                                            cos.writeObject(jf);
+                                            JLabel jl = (JLabel) cis.readObject();
+                                            JTextArea textArea = (JTextArea) cis.readObject();
+                                            JScrollPane scrollPane = new JScrollPane(textArea);
+                                            jf.add(BorderLayout.NORTH, jl);
+                                            jf.add(BorderLayout.CENTER, scrollPane);
+                                            jf.setVisible(true);
+                                        } catch (IOException | ClassNotFoundException ex) {
+                                            ex.printStackTrace();
+                                        }
                                     } else if (airline.equals("Delta")) {
-                                        JTextArea textArea = new JTextArea(6, 25);
-                                        textArea.setText("Delta " + d.getCapacity() + "\n" + d.getPassengers());
-                                        textArea.setEditable(false);
-                                        JScrollPane scrollPane = new JScrollPane(textArea);
-                                        JOptionPane.showMessageDialog(null, scrollPane, "Passengers",
-                                                JOptionPane.PLAIN_MESSAGE);
+                                        try {
+                                            cos.writeObject(d);
+                                            cos.writeObject(jf);
+                                            JLabel jl = (JLabel) cis.readObject();
+                                            JTextArea textArea = (JTextArea) cis.readObject();
+                                            JScrollPane scrollPane = new JScrollPane(textArea);
+                                            jf.add(BorderLayout.NORTH, jl);
+                                            jf.add(BorderLayout.CENTER, scrollPane);
+                                            jf.setVisible(true);
+                                        } catch (IOException | ClassNotFoundException ex) {
+                                            ex.printStackTrace();
+                                        }
 
                                     } else if (airline.equals("Alaska")){
-                                        JTextArea textArea = new JTextArea(6, 25);
-                                        textArea.setText("Alaska " + alaska.getCapacity() + "\n" + alaska.getPassengers());
-                                        textArea.setEditable(false);
-                                        JScrollPane scrollPane = new JScrollPane(textArea);
-                                        JOptionPane.showMessageDialog(null, scrollPane, "Passengers",
-                                                JOptionPane.PLAIN_MESSAGE);
-
+                                        try {
+                                            cos.writeObject(alaska);
+                                            cos.writeObject(jf);
+                                            JLabel jl = (JLabel) cis.readObject();
+                                            JTextArea textArea = (JTextArea) cis.readObject();
+                                            JScrollPane scrollPane = new JScrollPane(textArea);
+                                            jf.add(BorderLayout.NORTH, jl);
+                                            jf.add(BorderLayout.CENTER, scrollPane);
+                                            jf.setVisible(true);
+                                        } catch (IOException | ClassNotFoundException ex) {
+                                            ex.printStackTrace();
+                                        }
                                     }
+
+                                    JPanel cp = (JPanel) jf.getContentPane(); //START OF KEY BIND
+                                    ActionMap aMap = cp.getActionMap();
+                                    InputMap inMap = cp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+                                    KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true);
+                                    inMap.put(escape, "Exit");
+                                    AbstractAction aa = new AbstractAction() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            jf.setVisible(false);
+                                        }
+                                    };
+                                    aMap.put("Exit", aa);
+
 
                                 }
 
@@ -293,6 +326,7 @@ public final class ReservationClient {
                         // check available
                         // cos.write(airline)
                         // cos.write(null)
+                        // cis.readBoolean()
                         // write passenger to file by using the server not the airline class
                         // cos.write(passenger)
                         // cos.write(airline)

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Southwest implements Airline {
 
-    public String toString() {
+    public synchronized String toString() {
         return "<html><div style='text-align: center;'>Southwest Airlines is proud to offer flights to Purdue University.<br>" +
                 "We are happy to offer free in flight wifi, as well as our amazing snacks.<br>" +
                 "In addition, we offer flights for much cheaper than other airlines, and offer two free checked bags.<br>" +
@@ -11,7 +11,7 @@ public class Southwest implements Airline {
     }
 
     @Override
-    public boolean spaceAvailable(){
+    public synchronized boolean spaceAvailable(){
         try {
             File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
@@ -37,7 +37,7 @@ public class Southwest implements Airline {
     }
 
     @Override
-    public void addPassenger(String passenger){
+    public synchronized void addPassenger(String passenger){
         try {
             File file = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             File temp = File.createTempFile("temp-file-name", ".txt");
@@ -71,7 +71,7 @@ public class Southwest implements Airline {
     }
 
     @Override
-    public String getPassengers(){
+    public synchronized String getPassengers(){
         try {
             File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
@@ -99,7 +99,7 @@ public class Southwest implements Airline {
     }
 
     @Override
-    public String getCapacity(){
+    public synchronized String getCapacity(){
         try {
             File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
@@ -111,7 +111,7 @@ public class Southwest implements Airline {
                     break;
                 }
             }
-            return line;
+            return "SOUTHWEST " + line;
         } catch (IOException e) {
 
         }
