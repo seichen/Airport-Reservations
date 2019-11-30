@@ -1,3 +1,4 @@
+import javax.naming.InvalidNameException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -62,18 +63,21 @@ public final class ReservationClient {
                 mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
                 JLabel middle = new JLabel(alaska.toString());
                 middle.setHorizontalAlignment(JLabel.CENTER);
+                JLabel first = new JLabel("What is your first name?");
                 JTextField firstName = new JTextField();
                 JLabel last = new JLabel("What is your last name?");
                 JTextField lastname = new JTextField();
                 JLabel age = new JLabel("What is your age?");
                 JTextField a = new JTextField();
                 mid.add(middle);
+                mid.add(first);
                 mid.add(firstName);
                 mid.add(last);
                 mid.add(lastname);
                 mid.add(age);
                 mid.add(a);
                 middle.setVisible(false);
+                first.setVisible(false);
                 firstName.setVisible(false);
                 last.setVisible(false);
                 lastname.setVisible(false);
@@ -268,7 +272,7 @@ public final class ReservationClient {
                                         middle.setVisible(false);
                                         heading.setText("Are you sure that you want to book a flight on Alaska Airlines?");
                                         book.setText("Yes, I want this flight");
-                                        book.setActionCommand("toStep6");
+                                        book.setActionCommand("Step6");
                                         no.setVisible(true);
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Flight is full");
@@ -290,7 +294,7 @@ public final class ReservationClient {
                                     middle.setVisible(false);
                                     heading.setText("Are you sure that you want to book a flight on Southwest Airlines?");
                                     book.setText("Yes, I want this flight");
-                                    book.setActionCommand("toStep6");
+                                    book.setActionCommand("Step6");
                                     no.setVisible(true);
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Flight is full");
@@ -322,6 +326,218 @@ public final class ReservationClient {
                                 }
                             }
                         }
+
+                        if("Step6".equals(actionEvent.getActionCommand())) {
+
+                            JPanel cp = (JPanel) f.getContentPane(); //START OF KEY BIND
+                            ActionMap aMap = cp.getActionMap();
+                            InputMap inMap = cp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+                            KeyStroke slashKey = KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, 0, true);
+                            inMap.put(slashKey, "OpenAirlineList");
+                            AbstractAction abstractAction = new AbstractAction() {
+
+                                @Override
+
+                                public void actionPerformed(ActionEvent e) {
+
+                                    String airline = (String) airlineList.getSelectedItem();
+                                    JFrame jf = new JFrame("Passengers");
+                                    jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                    jf.setSize(300,300);
+
+
+                                    if (airline.equals("Southwest")) {
+                                        try {
+                                            cos.writeObject(sw);
+                                            cos.writeObject(jf);
+                                            JLabel jl = (JLabel) cis.readObject();
+                                            JTextArea textArea = (JTextArea) cis.readObject();
+                                            JScrollPane scrollPane = new JScrollPane(textArea);
+                                            jf.add(BorderLayout.NORTH, jl);
+                                            jf.add(BorderLayout.CENTER, scrollPane);
+                                            jf.setVisible(true);
+                                        } catch (IOException | ClassNotFoundException ex) {
+                                            ex.printStackTrace();
+                                        }
+                                    } else if (airline.equals("Delta")) {
+                                        try {
+                                            cos.writeObject(d);
+                                            cos.writeObject(jf);
+                                            JLabel jl = (JLabel) cis.readObject();
+                                            JTextArea textArea = (JTextArea) cis.readObject();
+                                            JScrollPane scrollPane = new JScrollPane(textArea);
+                                            jf.add(BorderLayout.NORTH, jl);
+                                            jf.add(BorderLayout.CENTER, scrollPane);
+                                            jf.setVisible(true);
+                                        } catch (IOException | ClassNotFoundException ex) {
+                                            ex.printStackTrace();
+                                        }
+
+                                    } else if (airline.equals("Alaska")){
+                                        try {
+                                            cos.writeObject(alaska);
+                                            cos.writeObject(jf);
+                                            JLabel jl = (JLabel) cis.readObject();
+                                            JTextArea textArea = (JTextArea) cis.readObject();
+                                            JScrollPane scrollPane = new JScrollPane(textArea);
+                                            jf.add(BorderLayout.NORTH, jl);
+                                            jf.add(BorderLayout.CENTER, scrollPane);
+                                            jf.setVisible(true);
+                                        } catch (IOException | ClassNotFoundException ex) {
+                                            ex.printStackTrace();
+                                        }
+                                    }
+
+                                    JPanel cp = (JPanel) jf.getContentPane(); //START OF KEY BIND
+                                    ActionMap aMap = cp.getActionMap();
+                                    InputMap inMap = cp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+                                    KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true);
+                                    inMap.put(escape, "Exit");
+                                    AbstractAction aa = new AbstractAction() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            jf.setVisible(false);
+                                        }
+                                    };
+                                    aMap.put("Exit", aa);
+
+
+                                }
+
+
+                            };
+                            aMap.put("OpenAirlineList", abstractAction); // end of keybind
+
+                            String airline = (String) airlineList.getSelectedItem();
+                           if (airline.equals("Alaska")) {
+                               try {
+                                    cos.writeObject(alaska);
+                                    cos.writeObject(null);
+                                    boolean av = cis.readBoolean();
+
+                                    if (av) {
+                                        heading.setText("Please input your information below.");
+                                        mid.setVisible(true);
+                                        middle.setVisible(false);
+                                        first.setVisible(true);
+                                        firstName.setVisible(true);
+                                        last.setVisible(true);
+                                        lastname.setVisible(true);
+                                        age.setVisible(true);
+                                        a.setVisible(true);
+                                        no.setVisible(false);
+                                        book.setText("Next");
+                                        book.setActionCommand("Step7");
+                                    }
+
+                               } catch (IOException e) {
+                                   e.printStackTrace();
+                               }
+                           } else if (airline.equals("Southwest")) {
+                               try {
+                                   cos.writeObject(sw);
+                                   cos.writeObject(null);
+                                   boolean av = cis.readBoolean();
+
+                                   if (av) {
+                                       heading.setText("Please input your information below.");
+                                       mid.setVisible(true);
+                                       middle.setVisible(false);
+                                       first.setVisible(true);
+                                       firstName.setVisible(true);
+                                       last.setVisible(true);
+                                       lastname.setVisible(true);
+                                       age.setVisible(true);
+                                       a.setVisible(true);
+                                       no.setVisible(false);
+                                       book.setText("Next");
+                                       book.setActionCommand("Step7");
+                                   }
+
+                               } catch (IOException e) {
+                                   e.printStackTrace();
+                               }
+                           } else if (airline.equals("Delta")) {
+                               try {
+                                   cos.writeObject(d);
+                                   cos.writeObject(null);
+                                   boolean av = cis.readBoolean();
+
+                                   if (av) {
+                                       heading.setText("Please input your information below.");
+                                       mid.setVisible(true);
+                                       middle.setVisible(false);
+                                       first.setVisible(true);
+                                       firstName.setVisible(true);
+                                       last.setVisible(true);
+                                       lastname.setVisible(true);
+                                       age.setVisible(true);
+                                       a.setVisible(true);
+                                       no.setVisible(false);
+                                       book.setText("Next");
+                                       book.setActionCommand("Step7");
+                                   }
+
+                               } catch (IOException e) {
+                                   e.printStackTrace();
+                               }
+                           }
+                        }
+
+                        if ("Step7".equals(actionEvent.getActionCommand())) {
+                            JPanel cp = (JPanel) f.getContentPane();
+                            ActionMap aMap = cp.getActionMap();
+                            InputMap inMap = cp.getInputMap();
+                            KeyStroke slashKey = KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, 0, true);
+                            inMap.put(slashKey, null);
+                            aMap.put(slashKey, null);
+
+                            String f = firstName.getText();
+                            boolean correctFirstName;
+
+                            try {
+                                verifyString(f);
+                                correctFirstName = true;
+                            } catch (InvalidNameException e) {
+                                correctFirstName = false;
+                                e.printStackTrace();
+                            }
+
+                            String l = lastname.getText();
+                            boolean correctLastName;
+
+                            try {
+                                verifyString(l);
+                                correctLastName = true;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                correctLastName = false;
+                            }
+
+                            String ageString = a.getText();
+                            boolean correctAge;
+
+                            try {
+                                int ageInteger = Integer.parseInt(ageString);
+                                correctAge = true;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                correctAge = false;
+                            }
+
+                            if (correctFirstName && correctLastName && correctAge) {
+                                int confirm = JOptionPane.showConfirmDialog(null, "Are all the details you entered correct? \n The passenger's name is " + f + " " + l + " and their age is " + ageString + ". \n If all the information shown is correct, select the Yes button down below, otherwise, select the No button.", "Confirm Info", JOptionPane.YES_NO_OPTION);
+                                if (confirm == 1) {
+                                    book.setActionCommand("Step6");
+                                } else {
+                                    book.setActionCommand("Step8");
+                                }
+                            } else {
+                                book.setActionCommand("Step6");
+                            }
+
+                        }
+
                         // STEP 6
                         // check available
                         // cos.write(airline)
@@ -356,13 +572,22 @@ public final class ReservationClient {
                             heading.setText("Choose a flight from the drop down menu.");
                             middle.setVisible(true);
                             book.setText("Choose this flight");
-                            book.setActionCommand("toStep5");
+                            book.setActionCommand("Step5");
                             no.setVisible(false);
                         }
                     }
                 });
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    public static void verifyString(String string) throws InvalidNameException {
+        char[] stringAsChars = string.toCharArray();
+        for (int i = 0; i < stringAsChars.length; i++) {
+            if (Character.isDigit(stringAsChars[i])) {
+                throw new InvalidNameException("Please enter a valid name.");
             }
         }
     }
