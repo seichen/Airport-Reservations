@@ -17,7 +17,7 @@ public class Alaska implements Airline {
     @Override
     public synchronized boolean spaceAvailable() {
         try {
-            File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File f = new File("src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
 
@@ -43,41 +43,46 @@ public class Alaska implements Airline {
     @Override
     public synchronized void addPassenger(String passenger){
         try {
-            File file = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
-            File temp = File.createTempFile("temp-file-name", ".txt");
+            ArrayList<String> fileText = new ArrayList<>();
+
+            File file = new File("src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(file));
-            PrintWriter pw = new PrintWriter(new FileWriter(temp));
             String line;
-            String line2;
-            while (!(line = br.readLine()).equals("EOF") && !(line2 = br.readLine()).equals("EOF")) {
+            while (!(line = br.readLine()).equals("EOF")) {
                 if (line.equals("ALASKA")) {
-                    pw.println(line);
-                    String[] nums = line2.split("/");
+                    fileText.add(line);
+                    line = br.readLine();
+                    String[] nums = line.split("/");
                     int add = Integer.parseInt(nums[0]) + 1;
-                    line2 = "" + add + "/" + nums[1];
-                    pw.println(line2);
+                    line = "" + add + "/" + nums[1];
+                    fileText.add(line);
                 } else {
-                    pw.println(line);
-                    pw.println(line2);
+                    fileText.add(line);
                 }
                 if (line.equals("Alaska passenger list")) {
-                    pw.println(passenger);
-                    pw.println("------------------------------ALASKA");
+                    line = br.readLine();
+                    fileText.add(line);
+                    fileText.add(passenger);
+                    fileText.add("---------------------ALASKA");
                 }
+            }
+            fileText.add("EOF");
+            PrintWriter pw = new PrintWriter(new FileWriter(file, false));
+            for (int i = 0; i < fileText.size(); i++) {
+                pw.println(fileText.get(i));
+                pw.flush();
             }
             br.close();
             pw.close();
-            file.delete();
-            temp.renameTo(file);
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
     @Override
     public synchronized String getPassengers() {
         try {
-            File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File f = new File("src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
             ArrayList<String> passengers = new ArrayList<>();
@@ -108,7 +113,7 @@ public class Alaska implements Airline {
     @Override
     public synchronized String getCapacity(){
         try {
-            File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File f = new File("src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
 

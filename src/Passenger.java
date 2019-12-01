@@ -24,7 +24,7 @@ public class Passenger implements Serializable {
     }
 
     public String toString() {
-        return String.format("%s.%s, %d", getFirstName().substring(0,1), getLastName(), getAge());
+        return String.format("%s. %s, %d", getFirstName().substring(0,1), getLastName(), getAge());
     }
 
     @Override
