@@ -70,6 +70,7 @@ public final class ReservationClient {
                 Alaska alaska = new Alaska();
                 Southwest sw = new Southwest();
                 Delta d = new Delta();
+                Gate g = new Gate();
                 String airline;
 
                 Passenger p;
@@ -94,6 +95,7 @@ public final class ReservationClient {
                 mid.setLayout(new BoxLayout(mid, BoxLayout.Y_AXIS));
                 JLabel middle = new JLabel(alaska.toString());
                 middle.setHorizontalAlignment(JLabel.CENTER);
+                JLabel first = new JLabel("What is your first name?");
                 JTextField firstName = new JTextField();
                 JLabel last = new JLabel("What is your last name?");
                 JTextField lastname = new JTextField();
@@ -103,12 +105,14 @@ public final class ReservationClient {
                 JLabel image = new JLabel(ii);
                 mid.add(image);
                 mid.add(middle);
+                mid.add(first);
                 mid.add(firstName);
                 mid.add(last);
                 mid.add(lastname);
                 mid.add(age);
                 mid.add(a);
                 middle.setVisible(false);
+                first.setVisible(false);
                 firstName.setVisible(false);
                 last.setVisible(false);
                 lastname.setVisible(false);
@@ -573,6 +577,15 @@ public final class ReservationClient {
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+    }
+
+    public static void verifyString(String string) throws InvalidNameException {
+        char[] stringAsChars = string.toCharArray();
+        for (int i = 0; i < stringAsChars.length; i++) {
+            if (Character.isDigit(stringAsChars[i])) {
+                throw new InvalidNameException("Please enter a valid name.");
             }
         }
     }
