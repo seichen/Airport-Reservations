@@ -17,7 +17,7 @@ public class Alaska implements Airline {
     @Override
     public synchronized boolean spaceAvailable() {
         try {
-            File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File f = new File("C:\\Users\\yashy\\Documents\\CS180\\Best-Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
 
