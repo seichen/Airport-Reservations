@@ -580,13 +580,4 @@ public final class ReservationClient {
             }
         }
     }
-
-    public static void verifyString(String string) throws InvalidNameException {
-        char[] stringAsChars = string.toCharArray();
-        for (int i = 0; i < stringAsChars.length; i++) {
-            if (Character.isDigit(stringAsChars[i])) {
-                throw new InvalidNameException("Please enter a valid name.");
-            }
-        }
-    }
 }
