@@ -18,7 +18,7 @@ public class BoardingPass implements Serializable {
     }
 
     public String toString(String airline) {
-        return String.format("BOARDING PASS FOR FLIGHT 18000 WITH %s \n PASSENGER FIRST NAME: %s \n PASSENGER LAST NAME: %s \n PASSENGER AGE: %d \n You can begin boarding at gate %s", airline, passenger.getFirstName(), passenger.getLastName(), passenger.getAge(), gate.toString());
+        return String.format("<html>BOARDING PASS FOR FLIGHT 18000 WITH %s <br>PASSENGER FIRST NAME: %s <br>PASSENGER LAST NAME: %s <br>PASSENGER AGE: %d <br>You can begin boarding at gate %s", airline, passenger.getFirstName(), passenger.getLastName(), passenger.getAge(), gate.toString());
     }
 
     @Override

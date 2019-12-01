@@ -10,9 +10,11 @@ N. CLAYMAN, 19
 ---------------------ALASKA
 
 DELTA
-2/200
+3/200
 Delta passenger list
 
+S. EICH, 18
+---------------------DELTA
 C. WESTMEYER, 19
 ---------------------DELTA
 K. ABHYANKAR, 19
@@ -20,9 +22,23 @@ K. ABHYANKAR, 19
 
 
 SOUTHWEST
-1/100
+8/100
 Southwest passenger list
 
+S. S, 18
+---------------------SOUTHWEST
+S. SA, 18
+---------------------SOUTHWEST
+P. WORK, 18
+---------------------SOUTHWEST
+S. EICH, 18
+---------------------SOUTHWEST
+S. EICHENBERGER, 18
+---------------------SOUTHWEST
+S. S, 1
+---------------------SOUTHWEST
+S. EICHENBERGER, 18
+---------------------SOUTHWEST
 C. WESTMEYER, 20
 ---------------------SOUTHWEST
 
