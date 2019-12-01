@@ -555,7 +555,11 @@ public final class ReservationClient {
 
                                     boolean av = (boolean) cis.readBoolean();
                                     if (av) {
-                                        heading.setText("Flight data displaying for Alaska Airlines \n Enjoy your flight! \n Flight is now boarding at Gate " + g.getTerminal() + g.getGate());
+                                        int gate = g.getGate();
+                                        String terminal = g.getTerminal();
+                                        heading.setText("<html><div style='text-align: center;'>Flight data displaying for Alaska Airlines<br>" +
+                                                "Enjoy your flight!<br>" +
+                                                "Flight is now boarding at Gate " + terminal + gate + "<br>");
                                     }
                                 } catch (IOException e) {
                                     e.printStackTrace();
@@ -567,7 +571,11 @@ public final class ReservationClient {
 
                                     boolean av = (boolean) cis.readBoolean();
                                     if (av) {
-                                        heading.setText("Flight data displaying for Southwest Airlines \n Enjoy your flight! \n Flight is now boarding at Gate " + g.getTerminal() + g.getGate());
+                                        int gate = g.getGate();
+                                        String terminal = g.getTerminal();
+                                        heading.setText("<html><div style='text-align: center;'>Flight data displaying for Southwest Airlines<br>" +
+                                                "Enjoy your flight!<br>" +
+                                                "Flight is now boarding at Gate " + terminal + gate + "<br>");
                                     }
                                 } catch (IOException e) {
                                     e.printStackTrace();
@@ -579,7 +587,11 @@ public final class ReservationClient {
 
                                     boolean av = (boolean) cis.readBoolean();
                                     if (av) {
-                                        heading.setText("Flight data displaying for Delta Airlines \n Enjoy your flight! \n Flight is now boarding at Gate " + g.getTerminal() + g.getGate());
+                                        int gate = g.getGate();
+                                        String terminal = g.getTerminal();
+                                        heading.setText("<html><div style='text-align: center;'>Flight data displaying for Delta Airlines<br>" +
+                                                "Enjoy your flight!<br>" +
+                                                "Flight is now boarding at Gate " + terminal + gate + "<br>");
                                     }
                                 } catch (IOException e) {
                                     e.printStackTrace();
