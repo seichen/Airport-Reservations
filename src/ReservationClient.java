@@ -41,6 +41,7 @@ public final class ReservationClient {
                 Alaska alaska = new Alaska();
                 Southwest sw = new Southwest();
                 Delta d = new Delta();
+                Gate g = new Gate();
                 String airline;
 
                 JFrame f = new JFrame("Purdue University Flight Reservation System");
@@ -538,6 +539,53 @@ public final class ReservationClient {
 
                         }
 
+                        if ("Step8".equals(actionEvent.getActionCommand())) {
+                            String airline = (String) airlineList.getSelectedItem();
+                            first.setVisible(false);
+                            firstName.setVisible(false);
+                            last.setVisible(false);
+                            lastname.setVisible(false);
+                            age.setVisible(false);
+                            a.setVisible(false);
+
+                            if (airline.equals("Alaska")) {
+                                try {
+                                    cos.writeObject(alaska);
+                                    cos.writeObject(null);
+
+                                    boolean av = (boolean) cis.readBoolean();
+                                    if (av) {
+                                        heading.setText("Flight data displaying for Alaska Airlines \n Enjoy your flight! \n Flight is now boarding at Gate " + g.getTerminal() + g.getGate());
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            } else if (airline.equals("Southwest")) {
+                                try {
+                                    cos.writeObject(sw);
+                                    cos.writeObject(null);
+
+                                    boolean av = (boolean) cis.readBoolean();
+                                    if (av) {
+                                        heading.setText("Flight data displaying for Southwest Airlines \n Enjoy your flight! \n Flight is now boarding at Gate " + g.getTerminal() + g.getGate());
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            } else if (airline.equals("Delta")) {
+                                try {
+                                    cos.writeObject(d);
+                                    cos.writeObject(null);
+
+                                    boolean av = (boolean) cis.readBoolean();
+                                    if (av) {
+                                        heading.setText("Flight data displaying for Delta Airlines \n Enjoy your flight! \n Flight is now boarding at Gate " + g.getTerminal() + g.getGate());
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
                         // STEP 6
                         // check available
                         // cos.write(airline)
