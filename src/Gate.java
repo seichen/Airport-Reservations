@@ -1,6 +1,16 @@
 import java.io.Serializable;
 import java.util.Random;
 
+/** Gate.java
+ *
+ * A class that creates a random gate and terminal.
+ *
+ * Sources used: None
+ *
+ * @author Yash Bansal and Sabrina Eichenberger, CS 180 BLK, Lab Section LC1
+ * @version 2019-12-01
+ */
+
 public class Gate implements Serializable {
     private int terminal;
     private int gate;

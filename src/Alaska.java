@@ -1,12 +1,23 @@
 import java.io.*;
 import java.util.ArrayList;
 
+/** Alaska.java
+ *
+ * A class that implements the airline interface. This is one of three airlines used in the project.
+ *
+ * Sources used: None
+ *
+ * @author Yash Bansal and Sabrina Eichenberger, CS 180 BLK, Lab Section LC1
+ * @version 2019-12-01
+ */
+
 public class Alaska implements Airline {
 
 
 
     public synchronized String toString() {
-        return "<html><div style='text-align: center;'>Alaska Airlines is proud to serve the strong and knowledgeable Boilermakers from Purdue University.<br>" +
+        return "<html><div style='text-align: center;'>Alaska Airlines is proud to serve the strong and " +
+                "knowledgeable Boilermakers from Purdue University.<br>" +
                 "We primarily fly westward, and often have stops in Alaska and California.<br>" +
                 "We have first class amenities, even in coach class.<br>" +
                 "We provide fun snacks, such as pretzels and goldfish.<br>" +
@@ -44,7 +55,6 @@ public class Alaska implements Airline {
     public synchronized void addPassenger(String passenger){
         try {
             ArrayList<String> fileText = new ArrayList<>();
-
             File file = new File("src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;

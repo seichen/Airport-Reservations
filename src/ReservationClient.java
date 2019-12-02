@@ -6,6 +6,16 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Objects;
 
+/** ReservationClient.java
+ *
+ * A class that houses the client of the program, and is where the GUI is implemented.
+ *
+ * Sources used: None
+ *
+ * @author Yash Bansal and Sabrina Eichenberger, CS 180 BLK, Lab Section LC1
+ * @version 2019-12-01
+ */
+
 public final class ReservationClient {
 
     private static Boolean spaceAvailable;
@@ -262,7 +272,8 @@ public final class ReservationClient {
                                 if (spaceAvailable) {
                                     airlineList.setVisible(false);
                                     middle.setVisible(false);
-                                    heading.setText("Are you sure that you want to book a flight on Southwest Airlines?");
+                                    heading.setText("Are you sure that you want to book a flight on Southwest" +
+                                            " Airlines?");
                                     book.setText("Yes, I want this flight");
                                     book.setActionCommand("Step6");
                                     no.setVisible(true);
@@ -283,7 +294,6 @@ public final class ReservationClient {
                                 }
                             }
                         }
-
                         if ("Step6".equals(actionEvent.getActionCommand())) {
 
                             String airline = (String) airlineList.getSelectedItem();
@@ -407,7 +417,8 @@ public final class ReservationClient {
                             JPanel cp = (JPanel) f.getContentPane();
                             ActionMap aMap = cp.getActionMap();
                             InputMap inMap = cp.getInputMap();
-                            KeyStroke slashKey = KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, 0, true);
+                            KeyStroke slashKey = KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, 0,
+                                    true);
                             inMap.put(slashKey, null);
                             aMap.put(slashKey, null);
 

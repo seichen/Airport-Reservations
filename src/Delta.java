@@ -1,10 +1,21 @@
 import java.io.*;
 import java.util.ArrayList;
 
+/** Delta.java
+ *
+ * A class that implements the airline interface. This is one of three airlines used in the project.
+ *
+ * Sources used: None
+ *
+ * @author Yash Bansal and Sabrina Eichenberger, CS 180 BLK, Lab Section LC1
+ * @version 2019-12-01
+ */
+
 public class Delta implements Airline {
 
     public synchronized String toString() {
-        return "<html><div style='text-align: center;'>Delta Airlines is proud too be one of the five premier Airlines at Purdue University<br>" +
+        return "<html><div style='text-align: center;'>Delta Airlines is proud too be one of the five premier " +
+                "Airlines at Purdue University<br>" +
                 "We offer exceptional services, with free limited WiFi for all customers.<br>" +
                 "Passengers who use T-Mobile as a cell phone carrier get additional benefits.<br>" +
                 "We are also happy to offer power outlets in each seat for passenger use.<br>" +
