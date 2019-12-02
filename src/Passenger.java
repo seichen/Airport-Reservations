@@ -1,5 +1,15 @@
 import java.io.Serializable;
 
+/** Passenger.java
+ *
+ * A class creates a passenger with a first and last name, as well as an age.
+ *
+ * Sources used: None
+ *
+ * @author Yash Bansal and Sabrina Eichenberger, CS 180 BLK, Lab Section LC1
+ * @version 2019-12-01
+ */
+
 public class Passenger implements Serializable {
     private String firstName;
     private String lastName;
@@ -32,7 +42,8 @@ public class Passenger implements Serializable {
         boolean equals = false;
         if (obj instanceof Passenger) {
             Passenger p = (Passenger) obj;
-            if (p.getAge() == getAge() && p.getFirstName().equals(getFirstName()) && p.getLastName().equals(getLastName()));
+            if (p.getAge() == getAge() && p.getFirstName().equals(getFirstName())
+                    && p.getLastName().equals(getLastName()));
             equals = true;
         }
         return equals;

@@ -1,12 +1,23 @@
 import java.io.*;
 import java.util.ArrayList;
 
+/** Alaska.java
+ *
+ * A class that implements the airline interface. This is one of three airlines used in the project.
+ *
+ * Sources used: None
+ *
+ * @author Yash Bansal and Sabrina Eichenberger, CS 180 BLK, Lab Section LC1
+ * @version 2019-12-01
+ */
+
 public class Alaska implements Airline {
 
 
 
     public synchronized String toString() {
-        return "<html><div style='text-align: center;'>Alaska Airlines is proud to serve the strong and knowledgeable Boilermakers from Purdue University.<br>" +
+        return "<html><div style='text-align: center;'>Alaska Airlines is proud to serve the strong and " +
+                "knowledgeable Boilermakers from Purdue University.<br>" +
                 "We primarily fly westward, and often have stops in Alaska and California.<br>" +
                 "We have first class amenities, even in coach class.<br>" +
                 "We provide fun snacks, such as pretzels and goldfish.<br>" +
@@ -43,7 +54,8 @@ public class Alaska implements Airline {
     @Override
     public synchronized void addPassenger(String passenger){
         try {
-            File file = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File file = new File("C:\\Users\\yashy\\Documents\\CS180\\Best-Airport\\src\\res\\" +
+                    "reservations.txt");
             File temp = File.createTempFile("temp-file-name", ".txt");
             BufferedReader br = new BufferedReader(new FileReader(file));
             PrintWriter pw = new PrintWriter(new FileWriter(temp));
@@ -77,7 +89,7 @@ public class Alaska implements Airline {
     @Override
     public synchronized String getPassengers() {
         try {
-            File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File f = new File("C:\\Users\\yashy\\Documents\\CS180\\Best-Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
             ArrayList<String> passengers = new ArrayList<>();
@@ -108,7 +120,7 @@ public class Alaska implements Airline {
     @Override
     public synchronized String getCapacity(){
         try {
-            File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File f = new File("C:\\Users\\yashy\\Documents\\CS180\\Best-Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
 

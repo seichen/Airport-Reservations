@@ -5,6 +5,16 @@ import java.awt.event.*;
 import java.io.*;
 import java.net.Socket;
 
+/** ReservationClient.java
+ *
+ * A class that houses the client of the program, and is where the GUI is implemented.
+ *
+ * Sources used: None
+ *
+ * @author Yash Bansal and Sabrina Eichenberger, CS 180 BLK, Lab Section LC1
+ * @version 2019-12-01
+ */
+
 public final class ReservationClient {
 
     public static void main(String[] args) throws IOException {
@@ -174,7 +184,8 @@ public final class ReservationClient {
                             JPanel cp = (JPanel) f.getContentPane(); //START OF KEY BIND
                             ActionMap aMap = cp.getActionMap();
                             InputMap inMap = cp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-                            KeyStroke slashKey = KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, 0, true);
+                            KeyStroke slashKey = KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, 0,
+                                    true);
                             inMap.put(slashKey, "OpenAirlineList");
                             AbstractAction abstractAction = new AbstractAction() {
 
@@ -233,7 +244,8 @@ public final class ReservationClient {
                                     JPanel cp = (JPanel) jf.getContentPane(); //START OF KEY BIND
                                     ActionMap aMap = cp.getActionMap();
                                     InputMap inMap = cp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-                                    KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true);
+                                    KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0,
+                                            true);
                                     inMap.put(escape, "Exit");
                                     AbstractAction aa = new AbstractAction() {
                                         @Override
@@ -293,7 +305,8 @@ public final class ReservationClient {
                                     if (test) {
                                     airlineList.setVisible(false);
                                     middle.setVisible(false);
-                                    heading.setText("Are you sure that you want to book a flight on Southwest Airlines?");
+                                    heading.setText("Are you sure that you want to book a flight on Southwest" +
+                                            " Airlines?");
                                     book.setText("Yes, I want this flight");
                                     book.setActionCommand("Step6");
                                     no.setVisible(true);
@@ -315,7 +328,8 @@ public final class ReservationClient {
                                     if (test) {
                                         airlineList.setVisible(false);
                                         middle.setVisible(false);
-                                        heading.setText("Are you sure that you want to book a flight on Delta Airlines?");
+                                        heading.setText("Are you sure that you want to book a flight on " +
+                                                "Delta Airlines?");
                                         book.setText("Yes, I want this flight");
                                         book.setActionCommand("Step6");
                                         no.setVisible(true);
@@ -333,7 +347,8 @@ public final class ReservationClient {
                             JPanel cp = (JPanel) f.getContentPane(); //START OF KEY BIND
                             ActionMap aMap = cp.getActionMap();
                             InputMap inMap = cp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-                            KeyStroke slashKey = KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, 0, true);
+                            KeyStroke slashKey = KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, 0,
+                                    true);
                             inMap.put(slashKey, "OpenAirlineList");
                             AbstractAction abstractAction = new AbstractAction() {
 
@@ -392,7 +407,8 @@ public final class ReservationClient {
                                     JPanel cp = (JPanel) jf.getContentPane(); //START OF KEY BIND
                                     ActionMap aMap = cp.getActionMap();
                                     InputMap inMap = cp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-                                    KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true);
+                                    KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0,
+                                            true);
                                     inMap.put(escape, "Exit");
                                     AbstractAction aa = new AbstractAction() {
                                         @Override
@@ -489,7 +505,8 @@ public final class ReservationClient {
                             JPanel cp = (JPanel) f.getContentPane();
                             ActionMap aMap = cp.getActionMap();
                             InputMap inMap = cp.getInputMap();
-                            KeyStroke slashKey = KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, 0, true);
+                            KeyStroke slashKey = KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, 0,
+                                    true);
                             inMap.put(slashKey, null);
                             aMap.put(slashKey, null);
 
@@ -555,7 +572,12 @@ public final class ReservationClient {
 
                                     boolean av = (boolean) cis.readBoolean();
                                     if (av) {
-                                        heading.setText("Flight data displaying for Alaska Airlines \n Enjoy your flight! \n Flight is now boarding at Gate " + g.getTerminal() + g.getGate());
+                                        int gate = g.getGate();
+                                        String terminal = g.getTerminal();
+                                        heading.setText("<html><div style='text-align: center;'>Flight data" +
+                                                " displaying for Alaska Airlines<br>" +
+                                                "Enjoy your flight!<br>" +
+                                                "Flight is now boarding at Gate " + terminal + gate + "<br>");
                                     }
                                 } catch (IOException e) {
                                     e.printStackTrace();
@@ -567,7 +589,12 @@ public final class ReservationClient {
 
                                     boolean av = (boolean) cis.readBoolean();
                                     if (av) {
-                                        heading.setText("Flight data displaying for Southwest Airlines \n Enjoy your flight! \n Flight is now boarding at Gate " + g.getTerminal() + g.getGate());
+                                        int gate = g.getGate();
+                                        String terminal = g.getTerminal();
+                                        heading.setText("<html><div style='text-align: center;'>Flight data " +
+                                                "displaying for Southwest Airlines<br>" +
+                                                "Enjoy your flight!<br>" +
+                                                "Flight is now boarding at Gate " + terminal + gate + "<br>");
                                     }
                                 } catch (IOException e) {
                                     e.printStackTrace();
@@ -579,7 +606,12 @@ public final class ReservationClient {
 
                                     boolean av = (boolean) cis.readBoolean();
                                     if (av) {
-                                        heading.setText("Flight data displaying for Delta Airlines \n Enjoy your flight! \n Flight is now boarding at Gate " + g.getTerminal() + g.getGate());
+                                        int gate = g.getGate();
+                                        String terminal = g.getTerminal();
+                                        heading.setText("<html><div style='text-align: center;'>Flight data " +
+                                                "displaying for Delta Airlines<br>" +
+                                                "Enjoy your flight!<br>" +
+                                                "Flight is now boarding at Gate " + terminal + gate + "<br>");
                                     }
                                 } catch (IOException e) {
                                     e.printStackTrace();

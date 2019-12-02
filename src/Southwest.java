@@ -1,12 +1,24 @@
 import java.io.*;
 import java.util.ArrayList;
 
+/** Southwest.java
+ *
+ * A class that implements the airline interface. This is one of three airlines used in the project.
+ *
+ * Sources used: None
+ *
+ * @author Yash Bansal and Sabrina Eichenberger, CS 180 BLK, Lab Section LC1
+ * @version 2019-12-01
+ */
+
 public class Southwest implements Airline {
 
     public synchronized String toString() {
-        return "<html><div style='text-align: center;'>Southwest Airlines is proud to offer flights to Purdue University.<br>" +
+        return "<html><div style='text-align: center;'>Southwest Airlines is proud to offer flights to " +
+                "Purdue University.<br>" +
                 "We are happy to offer free in flight wifi, as well as our amazing snacks.<br>" +
-                "In addition, we offer flights for much cheaper than other airlines, and offer two free checked bags.<br>" +
+                "In addition, we offer flights for much cheaper than other airlines, and offer two free checked bags." +
+                "<br>" +
                 "We hope you choose Southwest for your next flight.";
     }
 
@@ -39,7 +51,7 @@ public class Southwest implements Airline {
     @Override
     public synchronized void addPassenger(String passenger){
         try {
-            File file = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File file = new File("C:\\Users\\yashy\\Documents\\CS180\\Best-Airport\\src\\res\\reservations.txt");
             File temp = File.createTempFile("temp-file-name", ".txt");
             BufferedReader br = new BufferedReader(new FileReader(file));
             PrintWriter pw = new PrintWriter(new FileWriter(temp));
@@ -73,7 +85,7 @@ public class Southwest implements Airline {
     @Override
     public synchronized String getPassengers(){
         try {
-            File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File f = new File("C:\\Users\\yashy\\Documents\\CS180\\Best-Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
             ArrayList<String> passengers = new ArrayList<>();
@@ -101,7 +113,7 @@ public class Southwest implements Airline {
     @Override
     public synchronized String getCapacity(){
         try {
-            File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File f = new File("C:\\Users\\yashy\\Documents\\CS180\\Best-Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
 

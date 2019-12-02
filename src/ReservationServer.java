@@ -5,6 +5,16 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/** ReservationServer.java
+ *
+ * A class that houses the server of the program.
+ *
+ * Sources used: None
+ *
+ * @author Yash Bansal and Sabrina Eichenberger, CS 180 BLK, Lab Section LC1
+ * @version 2019-12-01
+ */
+
 public final class ReservationServer {
 
     public static void main(String[] args) throws IOException {

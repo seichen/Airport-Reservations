@@ -1,10 +1,21 @@
 import java.io.*;
 import java.util.ArrayList;
 
+/** Delta.java
+ *
+ * A class that implements the airline interface. This is one of three airlines used in the project.
+ *
+ * Sources used: None
+ *
+ * @author Yash Bansal and Sabrina Eichenberger, CS 180 BLK, Lab Section LC1
+ * @version 2019-12-01
+ */
+
 public class Delta implements Airline {
 
     public synchronized String toString() {
-        return "<html><div style='text-align: center;'>Delta Airlines is proud too be one of the five premier Airlines at Purdue University<br>" +
+        return "<html><div style='text-align: center;'>Delta Airlines is proud too be one of the five premier " +
+                "Airlines at Purdue University<br>" +
                 "We offer exceptional services, with free limited WiFi for all customers.<br>" +
                 "Passengers who use T-Mobile as a cell phone carrier get additional benefits.<br>" +
                 "We are also happy to offer power outlets in each seat for passenger use.<br>" +
@@ -40,7 +51,8 @@ public class Delta implements Airline {
     @Override
     public synchronized void addPassenger(String passenger){
         try {
-            File file = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File file = new File("C:\\Users\\yashy\\Documents\\CS180\\Best-Airport\\src\\res\\" +
+                    "reservations.txt");
             File temp = File.createTempFile("temp-file-name", ".txt");
             BufferedReader br = new BufferedReader(new FileReader(file));
             PrintWriter pw = new PrintWriter(new FileWriter(temp));
@@ -74,7 +86,7 @@ public class Delta implements Airline {
     @Override
     public synchronized String getPassengers(){
         try {
-            File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File f = new File("C:\\Users\\yashy\\Documents\\CS180\\Best-Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
             ArrayList<String> passengers = new ArrayList<>();
@@ -105,7 +117,7 @@ public class Delta implements Airline {
     @Override
     public synchronized String getCapacity(){
         try {
-            File f = new File("C:\\Users\\Sabrina\\OneDrive - purdue.edu\\CS 180-BLK\\Projects\\Airport\\src\\res\\reservations.txt");
+            File f = new File("C:\\Users\\yashy\\Documents\\CS180\\Best-Airport\\src\\res\\reservations.txt");
             BufferedReader br = new BufferedReader(new FileReader(f));
             String line;
 
