@@ -17,7 +17,9 @@ import java.util.Objects;
 
 public final class ReservationServer {
 
-    public static void main(String[] args) throws IOException {
+    private static Gate gate = new Gate();
+
+    public static void main(String[] args) throws IOException, InterruptedException {
         ServerSocket serverSocket = new ServerSocket(0);
         Socket clientSocket;
         ArrayList<Thread> t = new ArrayList<>();
@@ -39,9 +41,11 @@ public final class ReservationServer {
 
             t.get(connectionCount).start();
 
-            connectionCount++;
+            System.out.printf("<Client %d connected...>%n", connectionCount + 1);
 
-            System.out.printf("<Client %d connected...>%n", connectionCount);
+            t.get(connectionCount).join();
+
+            connectionCount++;
         }
 
     }
@@ -73,21 +77,22 @@ public final class ReservationServer {
                 while (clientSocket != null) {
                     one = cis.readObject();
                     two = cis.readObject();
-                    if (one instanceof Airline && two == null) {
+                    if (one instanceof Airline && two == null) { // ifSpaceAvailable
                         cos.writeBoolean(((Airline) one).spaceAvailable());
                         cos.flush();
-                    } else if (one instanceof Passenger && two instanceof Airline) {
+                    } else if (one instanceof Passenger && two instanceof Airline) { // addPassengerToList (VOID)
                         ((Airline) two).addPassenger(one.toString());
-                    } else if (one instanceof  Airline && two instanceof Airline) {
-                        cos.writeObject(one.toString());
-                        cos.flush();
-                    } else if (one instanceof Airline && two instanceof JFrame) {
+                    } else if (one instanceof Airline && two instanceof JFrame) { // getLabels
                         JLabel jl = new JLabel(((Airline) one).getCapacity());
                         JTextArea textArea = new JTextArea(6, 25);
                         textArea.setText(((Airline) one).getPassengers());
                         textArea.setEditable(false);
+                        JScrollPane js = new JScrollPane(textArea);
                         cos.writeObject(jl);
-                        cos.writeObject(textArea);
+                        cos.writeObject(js);
+                    } else if (one == null && two == null) {
+                        cos.writeObject(ReservationServer.gate);
+                        cos.flush();
                     }
                 }
                 cos.close();
